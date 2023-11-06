@@ -6,8 +6,19 @@ const gameboard = (function () {
     for (let i = 0; i < rows; i++) {
         board[i] = [];
         for(let j = 0; j < columns; j++){
-            board[i].push(Cell());
+            board[i].push(' ');
         }
+    }
+
+    const getBoard = () => board;
+
+    const addMark = (row, column, mark) => {
+        board[row][column] = mark;
+    }
+
+    return {
+        getBoard,
+        addMark
     }
 })();
 
