@@ -111,10 +111,11 @@ function GameController(
     return {
         playRound,
         getActivePlayer,
+        getBoard: gameboard.getBoard
     };
 }
 
-function screenController () {
+function ScreenController () {
     const game = GameController();
     const playerTurnDiv = document.querySelector('.turn');
     const boardDiv = document.querySelector('.board');
@@ -128,14 +129,16 @@ function screenController () {
         playerTurnDiv.textContent = `${activePlayer.name}'s turn`;
 
         board.forEach( (row, rowIndex) => {
+            rowDiv = document.createElement('div');
             row.forEach((box, columnIndex) => {
                 const boxButton = document.createElement('button');
                 boxButton.classList.add('box');
                 boxButton.dataset.column = columnIndex;
                 boxButton.dataset.row = rowIndex;
-                boxButton.textContent = box.getValue();
-                boardDiv.appendChild(boxButton);
-            })
+                boxButton.textContent = box;
+                rowDiv.appendChild(boxButton);
+            });
+            boardDiv.appendChild(rowDiv);
         })
     }
 
@@ -148,4 +151,7 @@ function screenController () {
     }
 
     boardDiv.addEventListener('click', clickBox);
+    updateScreen();
 }
+
+ScreenController();
