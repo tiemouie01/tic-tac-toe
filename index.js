@@ -18,10 +18,23 @@ const gameboard = (function () {
 
     const getBox = (row, column) => board[row][column];
 
+    const tie = () => {
+        let status = true;
+        for(let i = 0; i < rows; i++) {
+            for(let j = 0; j < columns; j++) {
+                if (board[i][j] === ' ') {
+                    status = false;
+                }
+            }
+        }
+        return status;
+    }
+
     return {
         getBoard,
         addMark,
-        getBox
+        getBox,
+        tie
     }
 })();
 
@@ -85,6 +98,8 @@ function GameController(
 
         if (checkForWinner(getActivePlayer().mark)) {
             declareWinner(getActivePlayer());
+        } else if (gameboard.tie()){
+            console.log('No winner, the game ends as a draw.');
         } else {
             switchPlayerTurn();
             printNewRound();
