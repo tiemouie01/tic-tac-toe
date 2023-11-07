@@ -116,9 +116,15 @@ function GameController(
 }
 
 function ScreenController () {
+    const body = document.body;
     const game = GameController();
-    const playerTurnDiv = document.querySelector('.turn');
-    const boardDiv = document.querySelector('.board');
+
+    const playerTurnDiv = document.createElement('div');
+    const boardDiv = document.createElement('div');
+    playerTurnDiv.classList.add('turn');
+    boardDiv.classList.add('board');
+    body.appendChild(playerTurnDiv);
+    body.appendChild(boardDiv);
 
     const updateScreen = () => {
         boardDiv.textContent = '';
