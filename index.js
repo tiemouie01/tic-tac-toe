@@ -16,23 +16,14 @@ const gameboard = (function () {
         board[row][column] = mark;
     }
 
+    const getBox = (row, column) => board[row][column];
+
     return {
         getBoard,
-        addMark
+        addMark,
+        getBox
     }
 })();
-
-function Cell() {
-    let mark = '';
-    const setMark = (playerMark) => {
-        mark = playerMark;
-    }
-    const getMark = () => value;
-    return {
-        setMark,
-        getMark
-    };
-}
 
 function Player(name, mark) {
     return {
@@ -61,28 +52,28 @@ function GameController(
     const getActivePlayer = () => activePlayer;
 
     const printNewRound = () => {
-        gameboard.getBoard();
-        console.log(`${getActivePlayer().name}'s turn.`)
+        console.log(gameboard.getBoard());
+        console.log(`${getActivePlayer().name}'s turn.`);
     }
 
     const declareWinner = (player) => {
-        gameboard.getBoard();
+        console.log(gameboard.getBoard());
         console.log(`Congratulations ${player.name}, You won!`);
     }
 
     const checkForWinner = (mark) => {
         let won = false;
-        if (gameboard[0][0] === mark && gameboard[0][1] === mark && gameboard[0][2] === mark){
+        if (gameboard.getBox(0,0) === mark && gameboard.getBox(0,1) === mark && gameboard.getBox(0,2) === mark){
             won = true;
-        } else if(gameboard[0][0] === mark && gameboard[1][0] === mark && gameboard[2][0] === mark) {
+        } else if(gameboard.getBox(0,0) === mark && gameboard.getBox(1,0) === mark && gameboard.getBox(2,0) === mark) {
             won = true;
-        } else if (gameboard[0][0] === mark && gameboard[1][1] === mark && gameboard[2][2] === mark) {
+        } else if (gameboard.getBox(0,0) === mark && gameboard.getBox(1,1) === mark && gameboard.getBox(2,2) === mark) {
             won = true;
-        } else if(gameboard[0][1] === mark && gameboard[1][1] === mark && gameboard[2][1] === mark) {
+        } else if(gameboard.getBox(0,1) === mark && gameboard.getBox(1,1) === mark && gameboard.getBox(2,1) === mark) {
             won = true;
-        } else if (gameboard[2][0] === mark && gameboard[1][1] === mark && gameboard[0][2] === mark) {
+        } else if (gameboard.getBox(2,0) === mark && gameboard.getBox(1,1) === mark && gameboard.getBox(0,2) === mark) {
             won = true;
-        } else if(gameboard[0][2] === mark && gameboard[1][2] === mark && gameboard[2][2] === mark) {
+        } else if(gameboard.getBox(0,2) === mark && gameboard.getBox(1,2) === mark && gameboard.getBox(2,2) === mark) {
             won = true;
         }
         return won;
@@ -104,7 +95,7 @@ function GameController(
 
     return {
         playRound,
-        getActivePlayer
+        getActivePlayer,
     };
 }
 
