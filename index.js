@@ -33,3 +33,22 @@ function Cell() {
         getMark
     };
 }
+
+function Player(name, mark) {
+    return {
+        name,
+        mark
+    };
+}
+
+function gameController(
+    playerOneName = 'Player One',
+    playerOneMark = 'X',
+    playerTwoName = 'Player Two',
+    playerTwoMark = 'O'
+) {
+    const players = [
+        Player(playerOneName, playerOneMark),
+        Player(playerTwoName, playerTwoMark)
+    ]
+}
