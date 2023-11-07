@@ -71,7 +71,7 @@ function GameController(
 
     const declareWinner = (player) => {
         console.log(gameboard.getBoard());
-        console.log(`Congratulations ${player.name}, You won!`);
+        alert(`Congratulations ${player.name}, You won!`);
     }
 
     const checkForWinner = (mark) => {
@@ -129,16 +129,14 @@ function ScreenController () {
         playerTurnDiv.textContent = `${activePlayer.name}'s turn`;
 
         board.forEach( (row, rowIndex) => {
-            rowDiv = document.createElement('div');
             row.forEach((box, columnIndex) => {
                 const boxButton = document.createElement('button');
                 boxButton.classList.add('box');
                 boxButton.dataset.column = columnIndex;
                 boxButton.dataset.row = rowIndex;
                 boxButton.textContent = box;
-                rowDiv.appendChild(boxButton);
+                boardDiv.appendChild(boxButton);
             });
-            boardDiv.appendChild(rowDiv);
         })
     }
 
