@@ -41,7 +41,7 @@ function Player(name, mark) {
     };
 }
 
-function gameController(
+function GameController(
     playerOneName = 'Player One',
     playerOneMark = 'X',
     playerTwoName = 'Player Two',
@@ -65,23 +65,24 @@ function gameController(
         console.log(`${getActivePlayer().name}'s turn.`)
     }
 
-    const declareWinner = () => {
-
+    const declareWinner = (player) => {
+        gameboard.getBoard();
+        console.log(`Congratulations ${player.name}, You won!`);
     }
 
-    const checkForWinner = (mark, board) => {
+    const checkForWinner = (mark) => {
         let won = false;
-        if (board[0][0] === mark && board[0][1] === mark && board[0][2] === mark){
+        if (gameboard[0][0] === mark && gameboard[0][1] === mark && gameboard[0][2] === mark){
             won = true;
-        } else if(board[0][0] === mark && board[1][0] === mark && board[2][0] === mark) {
+        } else if(gameboard[0][0] === mark && gameboard[1][0] === mark && gameboard[2][0] === mark) {
             won = true;
-        } else if (board[0][0] === mark && board[1][1] === mark && board[2][2] === mark) {
+        } else if (gameboard[0][0] === mark && gameboard[1][1] === mark && gameboard[2][2] === mark) {
             won = true;
-        } else if(board[0][1] === mark && board[1][1] === mark && board[2][1] === mark) {
+        } else if(gameboard[0][1] === mark && gameboard[1][1] === mark && gameboard[2][1] === mark) {
             won = true;
-        } else if (board[2][0] === mark && board[1][1] === mark && board[0][2] === mark) {
+        } else if (gameboard[2][0] === mark && gameboard[1][1] === mark && gameboard[0][2] === mark) {
             won = true;
-        } else if(board[0][2] === mark && board[1][2] === mark && board[2][2] === mark) {
+        } else if(gameboard[0][2] === mark && gameboard[1][2] === mark && gameboard[2][2] === mark) {
             won = true;
         }
         return won;
@@ -91,8 +92,12 @@ function gameController(
         console.log(`Placing ${getActivePlayer().mark} onto the board in row ${row}, column ${column}...`);
         gameboard.addMark(row, column, getActivePlayer().mark);
 
-        switchPlayerTurn();
-        printNewRound();
+        if (checkForWinner(getActivePlayer().mark)) {
+            declareWinner(getActivePlayer());
+        } else {
+            switchPlayerTurn();
+            printNewRound();
+        }
     }
 
     printNewRound();
@@ -103,4 +108,4 @@ function gameController(
     };
 }
 
-const game = gameController('Timothy', 'X', 'Eve', 'O');
+const game = GameController('Timothy', 'X', 'Eve', 'O');
