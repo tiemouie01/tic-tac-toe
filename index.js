@@ -6,7 +6,7 @@ const gameboard = (function () {
     for (let i = 0; i < rows; i++) {
         board[i] = [];
         for(let j = 0; j < columns; j++){
-            board[i].push(' ');
+            board[i].push('');
         }
     }
 
@@ -17,6 +17,14 @@ const gameboard = (function () {
     }
 
     const getBox = (row, column) => board[row][column];
+
+    const resetBoard = () => {
+        for (let i = 0; i < rows; i++) {
+            for(let j = 0; j < columns; j++) {
+                board[i][j] = '';
+            }
+        }
+    };
 
     const tie = () => {
         let status = true;
@@ -34,7 +42,8 @@ const gameboard = (function () {
         getBoard,
         addMark,
         getBox,
-        tie
+        tie,
+        resetBoard
     }
 })();
 
@@ -158,4 +167,16 @@ function ScreenController () {
     updateScreen();
 }
 
-ScreenController();
+const startButton = document.querySelector('.start');
+startButton.addEventListener('click', ScreenController);
+
+const restartButton = document.querySelector('.restart');
+restartButton.addEventListener('click', () => {
+    const body = document.body;
+    const boardDiv = document.querySelector('.board');
+    const playerTurnDiv = document.querySelector('.turn');
+    boardDiv.remove();
+    playerTurnDiv.remove();
+
+    ScreenController();
+});
