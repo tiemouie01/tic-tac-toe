@@ -125,9 +125,12 @@ function GameController(
     };
 }
 
-function ScreenController () {
+function ScreenController (
+    playerOneName = 'Player One',
+    playerTwoName = 'Player Two'
+) {
     const body = document.body;
-    const game = GameController();
+    const game = GameController(playerOneName, 'X', playerTwoName, 'O');
     game.resetBoard();
 
     const playerTurnDiv = document.createElement('div');
@@ -170,7 +173,11 @@ function ScreenController () {
 }
 
 const startButton = document.querySelector('.start');
-startButton.addEventListener('click', ScreenController);
+startButton.addEventListener('click', () => {
+    const playerOneName = (document.getElementById('player-one')).value;
+    const playerTwoName = (document.getElementById('player-two')).value;
+    ScreenController(playerOneName, playerTwoName);
+});
 
 const restartButton = document.querySelector('.restart');
 restartButton.addEventListener('click', () => {
@@ -179,5 +186,7 @@ restartButton.addEventListener('click', () => {
     boardDiv.remove();
     playerTurnDiv.remove();
 
-    ScreenController();
+    const playerOneName = (document.getElementById('player-one')).textContent;
+    const playerTwoName = (document.getElementById('player-two')).textContent;
+    ScreenController(playerOneName, playerTwoName);
 });
