@@ -51,4 +51,32 @@ function gameController(
         Player(playerOneName, playerOneMark),
         Player(playerTwoName, playerTwoMark)
     ]
+
+    let activePlayer = players[0];
+    const switchPlayerTurn = () => {
+        activePlayer = activePlayer === players[0] ? players[1] : players[0];
+    }
+
+    const getActivePlayer = () => activePlayer;
+
+    const printNewRound = () => {
+        gameboard.getBoard();
+        console.log(`${getActivePlayer().name}'s turn.`)
+    }
+
+    const playRound = (row, column) => {
+        console.log(`Placing ${getActivePlayer().mark} onto the board in row ${row}, column ${column}...`);
+        gameboard.addMark(row, column, getActivePlayer().mark);
+        switchPlayerTurn();
+        printNewRound();
+    }
+
+    printNewRound();
+
+    return {
+        playRound,
+        getActivePlayer
+    };
 }
+
+const game = gameController('Timothy', 'X', 'Eve', 'O');
