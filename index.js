@@ -114,4 +114,30 @@ function GameController(
     };
 }
 
-const game = GameController('Timothy', 'X', 'Eve', 'O');
+function screenController () {
+    const game = GameController();
+    const playerTurnDiv = document.querySelector('.turn');
+    const boardDiv = document.querySelector('.board');
+
+    const updateScreen = () => {
+        boardDiv.textContent = '';
+
+        const board = game.getBoard();
+        const activePlayer = game.getActivePlayer();
+
+        playerTurnDiv.textContent = `${activePlayer.name}'s turn`;
+
+        board.forEach( (row, rowIndex) => {
+            row.forEach((box, columnIndex) => {
+                const boxButton = document.createElement('button');
+                boxButton.classList.add('box');
+                boxButton.dataset.column = columnIndex;
+                boxButton.dataset.row = rowIndex;
+                boxButton.textContent = box.getValue();
+                boardDiv.appendChild(boxButton);
+            })
+        })
+    }
+
+    
+}
