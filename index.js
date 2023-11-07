@@ -30,7 +30,7 @@ const gameboard = (function () {
         let status = true;
         for(let i = 0; i < rows; i++) {
             for(let j = 0; j < columns; j++) {
-                if (board[i][j] === ' ') {
+                if (board[i][j] === '') {
                     status = false;
                 }
             }
@@ -120,13 +120,15 @@ function GameController(
     return {
         playRound,
         getActivePlayer,
-        getBoard: gameboard.getBoard
+        getBoard: gameboard.getBoard,
+        resetBoard: gameboard.resetBoard
     };
 }
 
 function ScreenController () {
     const body = document.body;
     const game = GameController();
+    game.resetBoard();
 
     const playerTurnDiv = document.createElement('div');
     const boardDiv = document.createElement('div');
@@ -172,7 +174,6 @@ startButton.addEventListener('click', ScreenController);
 
 const restartButton = document.querySelector('.restart');
 restartButton.addEventListener('click', () => {
-    const body = document.body;
     const boardDiv = document.querySelector('.board');
     const playerTurnDiv = document.querySelector('.turn');
     boardDiv.remove();
