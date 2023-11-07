@@ -53,6 +53,7 @@ function gameController(
     ]
 
     let activePlayer = players[0];
+
     const switchPlayerTurn = () => {
         activePlayer = activePlayer === players[0] ? players[1] : players[0];
     }
@@ -64,9 +65,32 @@ function gameController(
         console.log(`${getActivePlayer().name}'s turn.`)
     }
 
+    const declareWinner = () => {
+
+    }
+
+    const checkForWinner = (mark, board) => {
+        let won = false;
+        if (board[0][0] === mark && board[0][1] === mark && board[0][2] === mark){
+            won = true;
+        } else if(board[0][0] === mark && board[1][0] === mark && board[2][0] === mark) {
+            won = true;
+        } else if (board[0][0] === mark && board[1][1] === mark && board[2][2] === mark) {
+            won = true;
+        } else if(board[0][1] === mark && board[1][1] === mark && board[2][1] === mark) {
+            won = true;
+        } else if (board[2][0] === mark && board[1][1] === mark && board[0][2] === mark) {
+            won = true;
+        } else if(board[0][2] === mark && board[1][2] === mark && board[2][2] === mark) {
+            won = true;
+        }
+        return won;
+    }
+
     const playRound = (row, column) => {
         console.log(`Placing ${getActivePlayer().mark} onto the board in row ${row}, column ${column}...`);
         gameboard.addMark(row, column, getActivePlayer().mark);
+
         switchPlayerTurn();
         printNewRound();
     }
