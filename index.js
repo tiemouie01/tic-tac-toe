@@ -172,10 +172,22 @@ function ScreenController (
     updateScreen();
 }
 
+function setPlayerNames() {
+    let playerOneName = (document.getElementById('player-one')).value;
+    let playerTwoName = (document.getElementById('player-two')).value;
+
+    if (!playerOneName) {
+        playerOneName = 'Player One';
+    }
+    if (!playerTwoName) {
+        playerTwoName = 'Player Two';
+    }
+    return [playerOneName, playerTwoName];
+}
+
 const startButton = document.querySelector('.start');
 startButton.addEventListener('click', () => {
-    const playerOneName = (document.getElementById('player-one')).value;
-    const playerTwoName = (document.getElementById('player-two')).value;
+    [playerOneName, playerTwoName] = setPlayerNames();
     ScreenController(playerOneName, playerTwoName);
 });
 
@@ -186,7 +198,6 @@ restartButton.addEventListener('click', () => {
     boardDiv.remove();
     playerTurnDiv.remove();
 
-    const playerOneName = (document.getElementById('player-one')).value;
-    const playerTwoName = (document.getElementById('player-two')).value;
+    [playerOneName, playerTwoName] = setPlayerNames();
     ScreenController(playerOneName, playerTwoName);
 });
