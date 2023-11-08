@@ -79,8 +79,15 @@ function GameController(
     }
 
     const declareWinner = (player) => {
-        console.log(gameboard.getBoard());
-        alert(`Congratulations ${player.name}, You won!`);
+        // console.log(gameboard.getBoard());
+        // alert(`Congratulations ${player.name}, You won!`);
+
+        const body = document.body;
+        const winnerModal = document.createElement('dialog');
+        // winnerModal.dataset.modal;
+        winnerModal.textContent = `Congratulations ${player.name}, You won!\n Press Esc to continue`;
+        body.appendChild(winnerModal);
+        winnerModal.showModal();
     }
 
     const checkForWinner = (mark) => {
