@@ -186,7 +186,7 @@ restartButton.addEventListener('click', () => {
     boardDiv.remove();
     playerTurnDiv.remove();
 
-    const playerOneName = (document.getElementById('player-one')).textContent;
-    const playerTwoName = (document.getElementById('player-two')).textContent;
+    const playerOneName = (document.getElementById('player-one')).value;
+    const playerTwoName = (document.getElementById('player-two')).value;
     ScreenController(playerOneName, playerTwoName);
 });
