@@ -187,8 +187,11 @@ function setPlayerNames() {
 
 const startButton = document.querySelector('.start');
 startButton.addEventListener('click', () => {
-    [playerOneName, playerTwoName] = setPlayerNames();
-    ScreenController(playerOneName, playerTwoName);
+    const gameboard = document.querySelector('.board');
+    if (!gameboard) {
+        [playerOneName, playerTwoName] = setPlayerNames();
+        ScreenController(playerOneName, playerTwoName);
+    }
 });
 
 const restartButton = document.querySelector('.restart');
